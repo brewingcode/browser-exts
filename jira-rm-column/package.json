@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "repository": "https://github.com/brewingcode/css-grep",
+  "repository": "https://github.com/brewingcode/browser-exts",
   "manifest": {
     "manifest_version": 2,
     "name": "JIRA Remove Column",
