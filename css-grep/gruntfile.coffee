@@ -10,10 +10,7 @@ module.exports = (grunt) ->
     copy:
       assets: {
         ...fileOpts
-        src: [
-          'active.png'
-          'inactive.png'
-        ]
+        src: ['*.png']
       }
 
     clean:
