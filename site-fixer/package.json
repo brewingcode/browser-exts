@@ -19,6 +19,7 @@
     },
     "permissions": [
       "https://*.fandom.com/",
+      "https://*.wikipedia.org/",
       "activeTab", "tabs"
     ],
     "background": {
