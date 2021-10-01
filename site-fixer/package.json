@@ -1,0 +1,43 @@
+{
+  "name": "site-fixer",
+  "version": "1.2.2",
+  "description": "Fixes annoying things about various sites",
+  "scripts": {
+    "dev": "grunt dev",
+    "build": "grunt build --prod"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "repository": "https://github.com/brewingcode/browser-exts",
+  "manifest": {
+    "manifest_version": 2,
+    "name": "Site Fixer",
+    "browser_action": {
+      "default_title": "Site Fixer",
+      "default_icon": "icon.png"
+    },
+    "permissions": [
+      "https://*.fandom.com/",
+      "activeTab", "tabs"
+    ],
+    "background": {
+      "scripts": [
+        "main.js"
+      ],
+      "persistent": true
+    }
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "coffeescript": "^2.2.3",
+    "grunt": "brewingcode/grunt",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-coffee": "^2.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^3.3.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "load-grunt-tasks": "^4.0.0"
+  }
+}
