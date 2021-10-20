@@ -16,6 +16,7 @@ chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
             chrome.tabs.executeScript tab.id, code: '''
                 document.getElementById('siteNotice').remove();
                 document.getElementById('mw-panel').remove();
+                document.getElementById('frb-inline').remove();
                 document.getElementById('content').style.setProperty('margin-left', 0);
               '''
     , 500
