@@ -14,9 +14,9 @@ chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
             '''
         else if url.host.match /wikipedia\.org$/i
             chrome.tabs.executeScript tab.id, code: '''
-                document.getElementById('siteNotice').remove();
-                document.getElementById('mw-panel').remove();
-                document.getElementById('frb-inline').remove();
                 document.getElementById('content').style.setProperty('margin-left', 0);
+                document.getElementById('mw-panel').remove();
+                document.getElementById('siteNotice').remove();
+                document.getElementById('frb-inline').remove();
               '''
     , 500
