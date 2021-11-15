@@ -11,22 +11,32 @@
   "license": "ISC",
   "repository": "https://github.com/brewingcode/browser-exts",
   "manifest": {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "Site Fixer",
-    "browser_action": {
+    "action": {
       "default_title": "Site Fixer",
       "default_icon": "icon.png"
     },
-    "permissions": [
+    "host_permissions": [
       "https://*.fandom.com/",
       "https://*.wikipedia.org/",
-      "activeTab", "tabs"
+      "https://medium.com/"
+    ],
+    "permissions": [
+      "activeTab",
+      "scripting",
+      "tabs"
     ],
     "background": {
-      "scripts": [
-        "main.js"
-      ],
-      "persistent": true
+      "service_worker": "main.js"
+    },
+    "commands": {
+      "close-rightward-tabs": {
+        "suggested_key": {
+          "default": "Ctrl+Shift+Period"
+        },
+        "description": "Shortcut for closing tabs to the right"
+      }
     }
   },
   "devDependencies": {

@@ -26,8 +26,6 @@ module.exports = (grunt) ->
         options:
           sourceMap: not grunt.option('prod')
           bare: true
-          transpile:
-            presets: ['env']
         files: [{
           ...fileOpts
           src: ['*.coffee', '!gruntfile.coffee']
