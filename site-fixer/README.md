@@ -1,5 +1,7 @@
-Fixes annoying things about various sites.
+Fixes annoying things about various sites by just injecting javascript all
+over the place.
 
-Mostly this involves horrible UX decisions by shitty people. See `jq
-.manifest.permissions package.json` for a list of sites we are looking to
-alter.
+Mostly this involves horrible UX decisions by shitty people.
+
+Also adds a `command` that you can keybind that mimics "close tabs to the
+right", so that you can do that without click around like an idiot.

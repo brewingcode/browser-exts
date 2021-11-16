@@ -18,9 +18,7 @@
       "default_icon": "icon.png"
     },
     "host_permissions": [
-      "https://*.fandom.com/",
-      "https://*.wikipedia.org/",
-      "https://medium.com/"
+      "<all_urls>"
     ],
     "permissions": [
       "activeTab",
@@ -33,7 +31,8 @@
     "commands": {
       "close-rightward-tabs": {
         "suggested_key": {
-          "default": "Ctrl+Shift+Period"
+          "default": "Ctrl+Shift+Period",
+          "mac": "Command+Shift+Period"
         },
         "description": "Shortcut for closing tabs to the right"
       }
