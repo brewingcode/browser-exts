@@ -12,23 +12,21 @@ chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
     return unless info.status is 'complete'
 
     fandom = ->
-        document.querySelector(".page__right-rail").remove()
-        document.querySelector(".global-navigation").remove()
-        document.querySelector(".fandom-sticky-header").remove()
-        document.querySelector('.main-container').style.setProperty('width', '100%')
-        document.querySelector('.main-container').style.setProperty('margin-left', 0)
-        document.getElementById('WikiaBar').remove()
+        document.querySelector(".page__right-rail")?.remove()
+        document.querySelector(".global-navigation")?.remove()
+        document.querySelector(".fandom-sticky-header")?.remove()
+        document.querySelector('.main-container')?.style.setProperty('width', '100%')
+        document.querySelector('.main-container')?.style.setProperty('margin-left', 0)
+        document.getElementById('WikiaBar')?.remove()
 
     wikipedia = ->
-        document.getElementById('content').style.setProperty('margin-left', 0)
-        document.getElementById('mw-panel').remove()
-        document.getElementById('siteNotice').remove()
-        document.getElementById('frb-inline').remove()
+        document.getElementById('content')?.style.setProperty('margin-left', 0)
+        document.getElementById('mw-panel')?.remove()
+        document.getElementById('siteNotice')?.remove()
+        document.getElementById('frb-inline')?.remove()
 
     medium = ->
-        n = document.querySelector('[aria-label="Sign in with Google"]').parentElement.parentElement
-        console.log("site-fixer:", n)
-        n.remove()
+        document.querySelector('[aria-label="Sign in with Google"]')?.parentElement?.parentElement?.remove()
 
     setTimeout ->
         url = new URL(tab.url)
