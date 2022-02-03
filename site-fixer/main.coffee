@@ -30,8 +30,26 @@ chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
     medium = ->
         document.querySelector('[aria-label="Sign in with Google"]')?.parentElement?.parentElement?.remove()
 
+    redfin = ->
+        document.querySelector(".AskAnAgentSection")?.remove()
+        document.querySelector(".OpenHouseSectionDesktop")?.remove()
+        document.querySelector(".HigherSimilarsSection")?.remove()
+        document.querySelector(".AmenitiesInfoSection")?.remove()
+        document.querySelector(".SchoolsSection")?.remove()
+        document.querySelector(".theRail")?.remove()
+        document.querySelector(".DPRedfinEstimateSection")?.remove()
+        document.querySelector(".RecommendedsSection")?.remove()
+        document.querySelector(".SimilarSoldsSection")?.remove()
+        document.querySelector(".SimilarsSection")?.remove()
+        document.querySelector(".SmartInterlinksSection")?.remove()
+        document.querySelector(".FAQSection")?.remove()
+
+        # forces a scroll, don't do yet
+        # document.querySelector(".bottom-link-propertyHistory")?.click()
+
+    url = new URL(tab.url)
+
     setTimeout ->
-        url = new URL(tab.url)
         if url.host.match /fandom\.com$/i
             chrome.scripting.executeScript
                 target: tabId: tab.id
@@ -46,4 +64,8 @@ chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
         chrome.scripting.executeScript
             target: tabId: tab.id
             func: medium
-    , 8000
+        if url.host.match /redfin\.com$/i
+            chrome.scripting.executeScript
+                target: tabId: tab.id
+                func: redfin
+    , 5000
