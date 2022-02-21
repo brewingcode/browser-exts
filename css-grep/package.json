@@ -15,7 +15,7 @@
     "name": "CSS Grep",
     "browser_action": {
       "default_title": "CSS Grep",
-      "default_icon": "inactive.png"
+      "default_icon": "icon-white.png"
     },
     "permissions": [
       "activeTab"
