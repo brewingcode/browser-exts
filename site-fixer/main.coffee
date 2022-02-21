@@ -43,6 +43,7 @@ chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
         document.querySelector(".SimilarsSection")?.remove()
         document.querySelector(".SmartInterlinksSection")?.remove()
         document.querySelector(".FAQSection")?.remove()
+        document.querySelector(".OwnerToolsSection")?.remove()
 
         # forces a scroll, don't do yet
         # document.querySelector(".bottom-link-propertyHistory")?.click()
