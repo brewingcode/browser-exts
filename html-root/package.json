@@ -29,12 +29,12 @@
       "service_worker": "main.js"
     },
     "commands": {
-      "copy-html-root": {
+      "copy": {
         "suggested_key": {
-          "default": "Ctrl+Shift+O",
-          "mac": "Command+Shift+O"
+          "default": "Alt+R",
+          "mac": "Alt+R"
         },
-        "description": "Shortcut to copy <html> to clipboard"
+        "description": "Copy <html> root to clipboard"
       }
     }
   },

@@ -29,12 +29,12 @@
       "service_worker": "main.js"
     },
     "commands": {
-      "close-rightward-tabs": {
+      "close": {
         "suggested_key": {
-          "default": "Ctrl+Shift+Period",
-          "mac": "Command+Shift+Period"
+          "default": "Alt+Period",
+          "mac": "Alt+Period"
         },
-        "description": "Shortcut for closing tabs to the right"
+        "description": "Close tabs to the right of the current active tab"
       }
     }
   },

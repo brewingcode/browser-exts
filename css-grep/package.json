@@ -25,6 +25,15 @@
         "background.js"
       ],
       "persistent": true
+    },
+    "commands": {
+      "toggle": {
+        "suggested_key": {
+          "default": "Alt+G",
+          "mac": "Alt+G"
+        },
+        "description": "Toggle css-grep UI on/off"
+      }
     }
   },
   "devDependencies": {

@@ -25,6 +25,15 @@
         "main.js"
       ],
       "persistent": true
+    },
+    "commands": {
+      "commits": {
+        "suggested_key": {
+          "default": "Alt+C",
+          "mac": "Alt+C"
+        },
+        "description": "Open each commit in the current PR in its own tab"
+      }
     }
   },
   "devDependencies": {

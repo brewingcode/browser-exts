@@ -25,7 +25,17 @@
         "remove.js"
       ],
       "persistent": true
+    },
+    "commands": {
+      "rm": {
+        "suggested_key": {
+          "default": "Alt+J",
+          "mac": "Alt+J"
+        },
+        "description": "Remove right-side pane from Jira UI"
+      }
     }
+
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
