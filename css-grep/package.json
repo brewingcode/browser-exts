@@ -11,23 +11,33 @@
   "license": "ISC",
   "repository": "https://github.com/brewingcode/browser-exts",
   "manifest": {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "CSS Grep",
-    "browser_action": {
+    "action": {
       "default_title": "CSS Grep",
       "default_icon": "icon-white.png"
     },
     "permissions": [
-      "activeTab"
+      "scripting"
+    ],
+    "host_permissions": [
+      "<all_urls>"
     ],
     "background": {
-      "scripts": [
-        "background.js"
-      ],
-      "persistent": true
+      "service_worker": "background.js"
     },
+    "content_scripts": [
+      {
+        "js": [ "content-script.js" ],
+        "matches": ["<all_urls>"]
+      }
+    ],
+    "web_accessible_resources": [{
+      "resources": ["grep.js"],
+      "matches": ["<all_urls>"]
+    }],
     "commands": {
-      "toggle": {
+      "": {
         "suggested_key": {
           "default": "Alt+G",
           "mac": "Alt+G"
@@ -47,5 +57,8 @@
     "grunt-contrib-uglify": "^3.3.0",
     "grunt-contrib-watch": "^1.1.0",
     "load-grunt-tasks": "^4.0.0"
+  },
+  "dependencies": {
+    "grunt-shell": "^3.0.1"
   }
 }

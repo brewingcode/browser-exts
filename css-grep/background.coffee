@@ -1,30 +1,51 @@
 tabs = {}
 
-chrome.tabs.onActivated.addListener (obj) ->
-  id = obj.tabId
-  if !tabs[id]
+get = (id) ->
+  if not tabs[id]
+    console.log 'making new tab ', id, tabs
     tabs[id] = showing: false
-  chrome.browserAction.setIcon path: if tabs[id].showing then 'icon-green.png' else 'icon-white.png'
+  return tabs[id]
 
-chrome.tabs.onUpdated.addListener (tabId, changeInfo, tab) ->
-  if tabs[tabId] and changeInfo and changeInfo.status is 'loading'
-    tabs[tabId].showing = false
-    chrome.browserAction.setIcon path: 'icon-white.png'
+enable = (id) ->
+  get(id).showing = true
+  chrome.action.setIcon path: 'icon-green.png'
+  chrome.scripting.executeScript
+    target: tabId: id
+    world: 'MAIN'
+    func: -> show()
 
-chrome.browserAction.onClicked.addListener (tab) ->
-  return unless tabs[tab.id]
-  if tabs[tab.id].showing
-    chrome.browserAction.setIcon path: 'icon-white.png'
-    chrome.tabs.executeScript tab.id, code: 'hide()'
-    tabs[tab.id].showing = false
+disable = (id) ->
+  get(id).showing = false
+  chrome.action.setIcon path: 'icon-white.png'
+  chrome.scripting.executeScript
+    target: tabId: id
+    world: 'MAIN'
+    func: -> hide()
+
+toggle = (tab) ->
+  id = tab?.id
+  if id and id isnt chrome.tabs.TAB_ID_NONE
+    if get(tab.id).showing
+      disable(id)
+    else
+      enable(id)
+
+chrome.tabs.onActivated.addListener (obj) ->
+  return if obj.tabId is chrome.tabs.TAB_ID_NONE
+  tab = get(obj.tabId)
+  if tab.showing
+    enable(obj.tabId)
   else
-    chrome.browserAction.setIcon path: 'icon-green.png'
-    chrome.tabs.executeScript tab.id, file: 'grep.js'
-    tabs[tab.id].showing = true
+    disable(obj.tabId)
 
-chrome.extension.onRequest.addListener (request, sender, sendResponse) ->
-  if request is 'hiding'
-    chrome.browserAction.setIcon path: 'icon-white.png'
-  else
-    chrome.browserAction.setIcon path: 'icon-green.png'
+chrome.commands.onCommand.addListener (command, tab) -> #async
+  toggle(tab)
+
+chrome.action.onClicked.addListener (tab) ->
+  toggle(tab)
+
+chrome.runtime.onMessage.addListener (msg, sender, sendResponse) ->
+  return unless msg is 'clicked-close'
+  get(sender.tab.id).showing = false
+  chrome.action.setIcon path: 'icon-white.png'
   sendResponse {}

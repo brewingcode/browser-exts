@@ -58,7 +58,7 @@ selectorCount = ->
 hide = ->
   restoreElements()
   $("##{id}").remove()
-  chrome.extension.sendRequest 'hiding'
+  window.postMessage 'clicked-close'
 
 filterElements = ->
   sel = $('input[placeholder="css selector"]').val()
@@ -95,5 +95,3 @@ matchFn = (q, t) ->
     return not m
   else
     return m
-
-show()
