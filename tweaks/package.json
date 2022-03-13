@@ -1,7 +1,7 @@
 {
-  "name": "css-grep",
-  "version": "1.2.2",
-  "description": "Greps a regex through DOM elements specified by a CSS selector",
+  "name": "tweaks",
+  "version": "1.0",
+  "description": "Various tweaks and handy shortcuts for the browser",
   "scripts": {
     "dev": "grunt dev",
     "build": "grunt build --prod"
@@ -12,14 +12,9 @@
   "repository": "https://github.com/brewingcode/browser-exts",
   "manifest": {
     "manifest_version": 3,
-    "name": "CSS Grep",
-    "action": {
-      "default_title": "CSS Grep",
-      "default_icon": "icon-white.png"
-    },
+    "name": "Browser Tweaks",
     "permissions": [
       "scripting",
-      "activeTab",
       "tabs"
     ],
     "host_permissions": [
@@ -58,6 +53,10 @@
       "pr-commits": {
         "description": "Open each commit in current PR in its own tab"
       }
+    },
+    "action": {
+      "default_title": "Browser Tweaks",
+      "default_icon": "icon-white.png"
     }
   },
   "devDependencies": {

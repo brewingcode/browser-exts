@@ -1,14 +1,33 @@
-# css-grep
+# tweaks
 
-> Greps a regex through DOM elements specified by a CSS selector
+> Various tweaks and handy shortcuts for the browser
 
-This extension puts a few \<input> elements in the top-left corner of the page:
+This Chrome extension adds five commands that are only executable via keyboard
+shortcut. It also adds a background script that automatically removes DOM
+elements from certain web pages.
 
-* the first is a CSS selector to match a set of nodes
+Commands:
 
-* the second is a regex that is matched against the .text() of each node
-
-Any nodes that do not match will be hidden from view. Here is an example of
-grepping through the Starbucks hot breakfast table:
-
-![screenshot](./screenshot.png)
+```
+    "commands": {
+      "css-grep": {
+        "description": "Toggle css-grep UI on/off",
+        "suggested_key": "Alt+G"
+      },
+      "close-to-right": {
+        "description": "Close tabs to the right of the active tab",
+        "suggested_key": "Alt+Period"
+      },
+      "jira-rm-column": {
+        "description": "Remove right-side Jira column",
+        "suggested_key": "Alt+J"
+      },
+      "html-root": {
+        "description": "Copy entire <html> DOM element to clipboard",
+        "suggested_key": "Alt+R"
+      },
+      "pr-commits": {
+        "description": "Open each commit in current PR in its own tab"
+      }
+    },
+```

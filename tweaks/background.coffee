@@ -61,7 +61,7 @@ commands =
 
 # make sure the extension icon stays up to date between tab switches
 chrome.tabs.onActivated.addListener (obj) ->
-  return if obj?.tabId is chrome.tabs.TAB_ID_NONE
+  console.log 'tabs.onActivated'
   tab = get(obj.tabId)
   if tab.showing
     enable(obj.tabId)
@@ -70,23 +70,29 @@ chrome.tabs.onActivated.addListener (obj) ->
 
 # handle keyboard commands
 chrome.commands.onCommand.addListener (command, tab) ->
-  return if tab?.id is chrome.tabs.TAB_ID_NONE
+  console.log 'commands.onCommand'
   commands[command](tab.id)
 
 # handle the extension icon getting clicked
 chrome.action.onClicked.addListener (tab) ->
+  console.log 'action.onClicked'
   commands['css-grep'](tab.id)
 
 # handle messages send from in-page javascript via window.postMessage -> runtime.sendMessage
 chrome.runtime.onMessage.addListener (msg, sender, sendResponse) ->
+  console.log 'runtime.onMessage'
   return unless msg is 'clicked-close'
   get(sender.tab.id).showing = false
   chrome.action.setIcon path: 'icon-white.png'
   sendResponse {}
 
-# automaticallyd delete DOM elements for some sites
+# automatically delete DOM elements for some sites
 chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
+  console.log 'tabs.onUpdated'
   return unless info.status is 'complete'
+
+  url = new URL(tab.url)
+  return if url.protocol is 'chrome'
 
   fandom = ->
     document.querySelector(".page__right-rail")?.remove()
@@ -124,10 +130,6 @@ chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
 
   # forces a scroll, don't do yet
   # document.querySelector(".bottom-link-propertyHistory")?.click()
-
-  url = new URL(tab.url)
-
-  return if url.protocol is 'chrome'
 
   setTimeout ->
     if url.host.match /fandom\.com$/i
