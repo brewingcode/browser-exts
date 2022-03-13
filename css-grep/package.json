@@ -18,7 +18,9 @@
       "default_icon": "icon-white.png"
     },
     "permissions": [
-      "scripting"
+      "scripting",
+      "activeTab",
+      "tabs"
     ],
     "host_permissions": [
       "<all_urls>"
@@ -37,12 +39,24 @@
       "matches": ["<all_urls>"]
     }],
     "commands": {
-      "": {
-        "suggested_key": {
-          "default": "Alt+G",
-          "mac": "Alt+G"
-        },
-        "description": "Toggle css-grep UI on/off"
+      "css-grep": {
+        "description": "Toggle css-grep UI on/off",
+        "suggested_key": "Alt+G"
+      },
+      "close-to-right": {
+        "description": "Close tabs to the right of the active tab",
+        "suggested_key": "Alt+Period"
+      },
+      "jira-rm-column": {
+        "description": "Remove right-side Jira column",
+        "suggested_key": "Alt+J"
+      },
+      "html-root": {
+        "description": "Copy entire <html> DOM element to clipboard",
+        "suggested_key": "Alt+R"
+      },
+      "pr-commits": {
+        "description": "Open each commit in current PR in its own tab"
       }
     }
   },

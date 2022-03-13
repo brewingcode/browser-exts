@@ -1,3 +1,6 @@
+url = new URL(window.location.href)
+return if url.protocol is 'chrome:'
+
 s = document.createElement('script')
 s.src = chrome.runtime.getURL('grep.js')
 (document.head or document.documentElement).appendChild(s)
