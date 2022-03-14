@@ -58,12 +58,16 @@ commands =
 
 # make sure the extension icon stays up to date between tab switches
 chrome.tabs.onActivated.addListener (obj) ->
-  # console.log 'tabs.onActivated'
-  tab = get(obj.tabId)
-  if tab.showing
-    enable(obj.tabId)
+  tab = await chrome.tabs.get obj.tabId
+  # console.log 'tabs.onActivated', tab
+  return unless tab.status is 'complete'
+  url = new URL(tab.url)
+  return if url.protocol is 'chrome:'
+
+  if get(tab.id).showing
+    enable(tab.id)
   else
-    disable(obj.tabId)
+    disable(tab.id)
 
 # handle keyboard commands
 chrome.commands.onCommand.addListener (command, tab) ->
