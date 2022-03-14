@@ -85,11 +85,10 @@ chrome.runtime.onMessage.addListener (msg, sender, sendResponse) ->
 
 # automatically delete DOM elements for some sites
 chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
-  # console.log 'tabs.onUpdated'
+  # console.log 'tabs.onUpdated', tab
   return unless info.status is 'complete'
-
   url = new URL(tab.url)
-  return if url.protocol is 'chrome'
+  return if url.protocol is 'chrome:'
 
   fandom = ->
     document.querySelector(".page__right-rail")?.remove()
