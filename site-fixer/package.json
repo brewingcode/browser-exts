@@ -48,6 +48,6 @@
     "load-grunt-tasks": "^5.1.0"
   },
   "dependencies": {
-    "grunt": "^1.4.1"
+    "grunt": "^1.3.0"
   }
 }
