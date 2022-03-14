@@ -11,7 +11,6 @@ enable = (id) ->
   chrome.action.setIcon path: 'icon-green.png'
   chrome.scripting.executeScript
     target: tabId: id
-    world: 'MAIN'
     func: -> show()
 
 disable = (id) ->
@@ -19,7 +18,6 @@ disable = (id) ->
   chrome.action.setIcon path: 'icon-white.png'
   chrome.scripting.executeScript
     target: tabId: id
-    world: 'MAIN'
     func: -> hide()
 
 commands =
