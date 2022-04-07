@@ -133,6 +133,30 @@ chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
     document.querySelector(".RentalEstimateSection")?.remove()
     document.querySelector(".ClimateRiskDataSection")?.remove()
 
+    # add link to Zillow
+    h = document.querySelector('h1.homeAddress')
+    if not h.querySelector('a')
+      space = document.createElement('span')
+      space.innerHTML = '&nbsp;'
+
+      addr = h.textContent.replace /[\s,]/g, '-'
+      a = document.createElement('a')
+      a.target = '_blank'
+      a.href = 'https://www.zillow.com/homes/'+addr+'_rb/'
+      a.textContent = '[Z]'
+
+      h.appendChild(space)
+      h.appendChild(a)
+
+  zillow = ->
+    document.querySelector('ul.zsg-tooltip-viewport').querySelector('li').remove()
+
+    details = document.querySelector('#Home-details')
+    divs = details.nextSibling.querySelectorAll('.hdp__sc-1j01zad-1.hmkpQE')
+
+    dest = document.querySelector('#Home-value').nextSibling.querySelector('.hdp__sc-1j01zad-0.bNxDKz').parentElement
+    dest.prepend(divs[2])
+
   # forces a scroll, don't do yet
   # document.querySelector(".bottom-link-propertyHistory")?.click()
 
@@ -145,6 +169,10 @@ chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
       chrome.scripting.executeScript
         target: tabId: tab.id
         func: wikipedia
+    else if  url.host.match /zillow\.com$/i
+      chrome.scripting.executeScript
+        target: tabId: tab.id
+        func: zillow
   , 500
 
   setTimeout ->
@@ -156,4 +184,4 @@ chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
       chrome.scripting.executeScript
         target: tabId: tab.id
         func: redfin
-  , 5000
+  , 3000
