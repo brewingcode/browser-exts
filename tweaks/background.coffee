@@ -19,6 +19,10 @@ disable = (id) ->
     target: tabId: id
     func: -> hide()
 
+tld = (url) ->
+  parts = new URL(url).hostname.split('.')
+  parts.slice(if parts.length > 3 then -3 else -2).join('.')
+
 commands =
   'css-grep': (id) ->
     if get(id).showing
@@ -51,10 +55,30 @@ commands =
           document.querySelectorAll('a[aria-label="View commit details"]').forEach (c) ->
             window.open(c.href, '_blank')
         , 1000
+
   'html-root': (id) ->
     chrome.scripting.executeScript
       target: tabId: id
       func: -> navigator.clipboard.writeText(document.documentElement.outerHTML)
+
+  'clear-client-state': (id) ->
+    tab = await chrome.tabs.get id
+    cookies = await chrome.cookies.getAll
+      domain: tld(tab.url)
+    await chrome.scripting.executeScript
+      target: tabId: id
+      args: [ tld(tab.url), cookies ]
+      func: (tld, cookies) ->
+        console.log "clearing localStorage and cookies for domain: #{tld}"
+        console.table Object.entries(localStorage)
+        console.table cookies
+        localStorage.clear()
+
+    for c in cookies
+      proto = 'http' + if c.secure then 's' else ''
+      await chrome.cookies.remove
+        url: "#{proto}://#{c.domain}#{c.path}"
+        name: c.name
 
 # make sure the extension icon stays up to date between tab switches
 chrome.tabs.onActivated.addListener (obj) ->

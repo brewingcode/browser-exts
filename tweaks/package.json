@@ -15,7 +15,8 @@
     "name": "Browser Tweaks",
     "permissions": [
       "scripting",
-      "tabs"
+      "tabs",
+      "cookies"
     ],
     "host_permissions": [
       "<all_urls>"
@@ -47,7 +48,10 @@
         "suggested_key": "Alt+R"
       },
       "pr-commits": {
-        "description": "Open each commit in current PR in its own tab"
+        "description": "Open each commit in current Github PR in its own tab"
+      },
+      "clear-client-state": {
+        "description": "Clears all cookies under the current tab's top-level-domain, AND localStorage for the current tab"
       }
     },
     "action": {
