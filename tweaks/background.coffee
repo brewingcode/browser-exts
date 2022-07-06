@@ -19,10 +19,6 @@ disable = (id) ->
     target: tabId: id
     func: -> hide()
 
-tld = (url) ->
-  parts = new URL(url).hostname.split('.')
-  parts.slice(if parts.length > 3 then -3 else -2).join('.')
-
 commands =
   'css-grep': (id) ->
     if get(id).showing
@@ -63,11 +59,12 @@ commands =
 
   'clear-client-state': (id) ->
     tab = await chrome.tabs.get id
+    tld = psl.parse(new URL(tab.url).hostname).domain
     cookies = await chrome.cookies.getAll
-      domain: tld(tab.url)
+      domain: tld
     await chrome.scripting.executeScript
       target: tabId: id
-      args: [ tld(tab.url), cookies ]
+      args: [ tld, cookies ]
       func: (tld, cookies) ->
         console.log "clearing localStorage and cookies for domain: #{tld}"
         console.table Object.entries(localStorage)

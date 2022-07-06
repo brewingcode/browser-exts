@@ -1,3 +1,5 @@
+{ execSync } = require 'child_process'
+
 module.exports = (grunt) ->
   require('load-grunt-tasks')(grunt)
 
@@ -51,7 +53,13 @@ module.exports = (grunt) ->
     grunt.log.ok()
 
   grunt.registerTask 'build', ->
-    grunt.task.run ['clean', 'copy', 'manifest', 'coffee']
+    grunt.task.run ['clean', 'copy', 'manifest', 'coffee', 'add-psl']
     grunt.task.run ['uglify'] if grunt.option('prod')
+
+  grunt.registerTask 'add-psl', ->
+    psl = execSync('cat $(which psl) | perl -lne \'last if m,// CLI,; print unless m,^#,\'')
+    bg = grunt.file.read('dist/background.js')
+    grunt.file.write('dist/background.js', psl + bg)
+    grunt.log.ok()
 
   grunt.registerTask('dev', ['build', 'watch'])
