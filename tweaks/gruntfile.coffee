@@ -58,6 +58,9 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'add-psl', ->
     psl = execSync('cat $(which psl) | perl -lne \'last if m,// CLI,; print unless m,^#,\'')
+    if psl?.length < 100
+      grunt.log.error '`psl` command is missing, `clean-client-state` command will not work'
+      return
     bg = grunt.file.read('dist/background.js')
     grunt.file.write('dist/background.js', psl + bg)
     grunt.log.ok()
