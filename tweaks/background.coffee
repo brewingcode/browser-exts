@@ -181,6 +181,11 @@ chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
   # forces a scroll, don't do yet
   # document.querySelector(".bottom-link-propertyHistory")?.click()
 
+  github = ->
+    a = document.querySelector('a#pull-requests-tab')
+    if a?.href.indexOf('?') is -1
+      a.href = a.href + '?q=is%3Apr+-label%3Adependencies+sort%3Aupdated-desc'
+
   setTimeout ->
     if url.host.match /fandom\.com$/i
       chrome.scripting.executeScript
@@ -194,6 +199,10 @@ chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
       chrome.scripting.executeScript
         target: tabId: tab.id
         func: zillow
+    else if  url.host.match /github\.com$/i
+      chrome.scripting.executeScript
+        target: tabId: tab.id
+        func: github
   , 500
 
   setTimeout ->
