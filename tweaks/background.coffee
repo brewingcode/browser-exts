@@ -189,8 +189,12 @@ chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
 
   github = ->
     a = document.querySelector('a#pull-requests-tab')
-    if a?.href.indexOf('?') is -1
+    if (window.location.href.indexOf('?') is -1) and (a.href.indexOf('?') is -1)
       a.href = a.href + '?q=is%3Apr+-label%3Adependencies+sort%3Aupdated-desc'
+    else
+      i = window.location.href.indexOf('?')
+      if i > 0
+        a.href = window.location.href.slice(0,i)
 
   setTimeout ->
     if url.host.match /fandom\.com$/i
@@ -205,10 +209,6 @@ chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
       chrome.scripting.executeScript
         target: tabId: tab.id
         func: zillow
-    else if  url.host.match /github\.com$/i
-      chrome.scripting.executeScript
-        target: tabId: tab.id
-        func: github
   , 500
 
   setTimeout ->
@@ -221,3 +221,10 @@ chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
         target: tabId: tab.id
         func: redfin
   , 3000
+
+  setInterval ->
+    if  url.host.match /github\.com$/i
+      chrome.scripting.executeScript
+        target: tabId: tab.id
+        func: github
+  , 2000
