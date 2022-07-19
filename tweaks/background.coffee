@@ -108,12 +108,18 @@ chrome.runtime.onMessage.addListener (msg, sender, sendResponse) ->
   chrome.action.setIcon path: 'icon-white.png'
   sendResponse {}
 
+listening = {}
+
 # automatically delete DOM elements for some sites
 chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
+
   # console.log 'tabs.onUpdated', tab
   return unless info.status is 'complete'
   url = new URL(tab.url)
   return if url.protocol is 'chrome:'
+
+  return if listening[tabId]
+  listening[tabId] = true
 
   fandom = ->
     document.querySelector(".page__right-rail")?.remove()
