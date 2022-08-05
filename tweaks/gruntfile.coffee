@@ -53,7 +53,7 @@ module.exports = (grunt) ->
     grunt.log.ok()
 
   grunt.registerTask 'build', ->
-    grunt.task.run ['clean', 'copy', 'manifest', 'coffee', 'add-psl']
+    grunt.task.run ['clean', 'copy', 'manifest', 'coffee']
     grunt.task.run ['uglify'] if grunt.option('prod')
 
   grunt.registerTask 'add-psl', ->

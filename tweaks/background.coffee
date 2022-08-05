@@ -59,17 +59,18 @@ commands =
 
   'clear-client-state': (id) ->
     tab = await chrome.tabs.get id
-    tld = psl.parse(new URL(tab.url).hostname).domain
     cookies = await chrome.cookies.getAll
-      domain: tld
+      url: tab.url
+
     await chrome.scripting.executeScript
       target: tabId: id
-      args: [ tld, cookies ]
-      func: (tld, cookies) ->
-        console.log "clearing localStorage and cookies for domain: #{tld}"
+      args: [ tab.url, cookies ]
+      func: (url, cookies) ->
+        console.log "clearing localStorage for #{url}"
         console.table Object.entries(localStorage)
         console.table cookies
         localStorage.clear()
+        console.log "clearing cookies for url: #{url}"
 
     for c in cookies
       proto = 'http' + if c.secure then 's' else ''
