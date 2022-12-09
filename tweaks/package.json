@@ -39,6 +39,10 @@
         "description": "Close tabs to the right of the active tab",
         "suggested_key": "Alt+Period"
       },
+      "new-window-to-right": {
+        "description": "Create a new window with the active tab and all tabs to the right ",
+        "suggested_key": "Alt+N"
+      },
       "jira-rm-column": {
         "description": "Remove right-side Jira column"
       },

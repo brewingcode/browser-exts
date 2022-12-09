@@ -19,6 +19,14 @@ disable = (id) ->
     target: tabId: id
     func: -> hide()
 
+tabsToRight = (id) ->
+    all = await chrome.tabs.query(currentWindow: true)
+    activeTab = await all.find (t) -> t.active or t.id is id
+    toRight = all
+        .filter (t) -> not t.pinned and (t.index > activeTab.index)
+    toRight.reverse()
+    return [activeTab, toRight...]
+
 commands =
   'css-grep': (id) ->
     if get(id).showing
@@ -27,13 +35,19 @@ commands =
       enable(id)
 
   'close-to-right': (id) ->
-    all = await chrome.tabs.query(currentWindow: true)
-    activeTab = await all.find (t) -> t.active or t.id is id
-    removeIds = all
-        .filter (t) -> not t.pinned and (t.index > activeTab.index)
-        .map (t) -> t.id
-    removeIds.reverse()
-    chrome.tabs.remove(removeIds)
+    chrome.tabs.remove (await tabsToRight id).slice(1).map (t) -> t.id
+
+  'new-window-to-right': (id) ->
+    tabs = await tabsToRight(id) # NOTE: must come before chrome.windows.create()
+
+    wind = await chrome.windows.create
+      focused: true
+      tabId: tabs.shift().id
+
+    tabs.reverse()
+    await chrome.tabs.move (tabs.map (t) -> t.id),
+      index: -1
+      windowId: wind.id
 
   'jira-rm-column': (id) ->
     chrome.scripting.executeScript
