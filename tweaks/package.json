@@ -40,8 +40,7 @@
         "suggested_key": "Alt+Period"
       },
       "jira-rm-column": {
-        "description": "Remove right-side Jira column",
-        "suggested_key": "Alt+J"
+        "description": "Remove right-side Jira column"
       },
       "html-root": {
         "description": "Copy entire <html> DOM element to clipboard",
