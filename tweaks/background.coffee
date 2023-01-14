@@ -139,12 +139,14 @@ chrome.tabs.onUpdated.addListener (tabId, info, tab) ->
   fandom = ->
     document.querySelector(".page__right-rail")?.remove()
     document.querySelector(".global-navigation")?.remove()
+    document.querySelector(".global-footer")?.remove()
     document.querySelector(".fandom-sticky-header")?.remove()
     document.querySelector("#mixed-content-footer")?.remove()
     document.querySelector(".wds-global-footer")?.remove()
     document.querySelector('.main-container')?.style.setProperty('width', '100%')
     document.querySelector('.main-container')?.style.setProperty('margin-left', 0)
     document.getElementById('WikiaBar')?.remove()
+    document.getElementById("mixed-content-footer")?.remove()
 
   wikipedia = ->
     document.getElementById('content')?.style.setProperty('margin-left', 0)
