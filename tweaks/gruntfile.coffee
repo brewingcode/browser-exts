@@ -16,7 +16,7 @@ module.exports = (grunt) ->
       }
 
     clean:
-      dist: ['dist/']
+      dist: ['dist/', 'dist-v2/']
 
     watch:
       src:
@@ -42,19 +42,29 @@ module.exports = (grunt) ->
           dest: 'dist/'
           src: '*.js'
         ]
+    shell:
+      copyV2: 'rsync -a dist/ dist-v2 && rm dist/manifest-v2.json && mv dist-v2/manifest-v2.json dist-v2/manifest.json'
 
   grunt.registerTask 'manifest', ->
     pkg = grunt.file.readJSON('package.json')
-    grunt.file.write 'dist/manifest.json', JSON.stringify {
+    manifest = {
       ...pkg.manifest
       version: pkg.version
       description: pkg.description
+    }
+
+    grunt.file.write 'dist/manifest.json', JSON.stringify manifest
+    grunt.file.write 'dist/manifest-v2.json', JSON.stringify {
+      ...manifest
+      background: scripts: [ 'background.js' ]
+      manifest_version: 2
     }
     grunt.log.ok()
 
   grunt.registerTask 'build', ->
     grunt.task.run ['clean', 'copy', 'manifest', 'coffee']
     grunt.task.run ['uglify'] if grunt.option('prod')
+    grunt.task.run ['shell']
 
   grunt.registerTask 'add-psl', ->
     psl = execSync('cat $(which psl) | perl -lne \'last if m,// CLI,; print unless m,^#,\'')

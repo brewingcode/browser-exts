@@ -26,8 +26,12 @@
     },
     "content_scripts": [
       {
-        "js": [ "content-script.js" ],
-        "matches": ["<all_urls>"]
+        "js": [
+          "content-script.js"
+        ],
+        "matches": [
+          "<all_urls>"
+        ]
       }
     ],
     "commands": {
@@ -72,9 +76,7 @@
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-uglify": "^5.0.1",
     "grunt-contrib-watch": "^1.1.0",
+    "grunt-shell": "^4.0.0",
     "load-grunt-tasks": "^5.1.0"
-  },
-  "dependencies": {
-    "grunt-shell": "^3.0.1"
   }
 }
