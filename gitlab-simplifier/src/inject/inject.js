@@ -9,9 +9,15 @@ var configuration = {
 	lock: [".block.issuable-sidebar-item.lock"],
 	dropScreenshots: ["li[data-testid=\"design-dropzone-wrapper\"]"],
 	issueType: [".dropdown.js-issuable-type-filter-dropdown-wrap", "label[for=\"issue_type\"]"],
-	todos: [".block.issuable-sidebar-header", ".shortcuts-todos"]
+	todos: [".block.issuable-sidebar-header", ".shortcuts-todos"],
+	entireRightSidebar: ["aside.js-right-sidebar"]
 }
 
+var alter = {
+	entireRightSidebar: function() {
+		$('div.merge-request-overview').css('grid-template-columns', 'auto');
+	}
+}
 
 function hideElement(name){
 	var dataObj = {};
@@ -22,7 +28,9 @@ function hideElement(name){
 			configuration[name].forEach(element => {
 				$(element).hide(); 
 			});
-			
+			if (alter[name]) {
+				alter[name]();
+			}
 			console.log(" > Hide " + name + " = " + dataObj[name]);
 		}else{
 			console.log(" > No configuration found for " + name)
