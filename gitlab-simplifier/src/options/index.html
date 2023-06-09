@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title></title>
+</head>
+<body>
+
+	<div class="w3-content">
+
+		<h1>GitLab Simplifier</h1>
+		<div>Simple extension to simplify your gitlab experience by hiding certain elements from the page.</div>
+		<table>
+
+		<tr>
+			<td>
+				<h3>Issue related properties</h3>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>
+					<input type="checkbox" id="epics" class="gitlab_option">
+					Hide Epics<a href="https://docs.gitlab.com/ee/user/group/epics/" target="_blank">?</a> (sidebar only)
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>
+					<input type="checkbox" id="iterations" class="gitlab_option">
+					Hide Iterations<a href="https://docs.gitlab.com/ee/user/group/iterations/" target="_blank">?</a> (sidebar only)
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>
+					<input type="checkbox" id="weights" class="gitlab_option">
+					Hide Weights/Option for weights<a href="https://docs.gitlab.com/ee/user/project/issues/issue_weight.html" target="_blank">?</a> (sidebar & creation flow)
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>
+					<input type="checkbox" id="timeTracking" class="gitlab_option">
+					Hide Time Tracking<a href="https://docs.gitlab.com/ee/user/project/time_tracking.html" target="_blank">?</a> (sidebar only)
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>
+					<input type="checkbox" id="dueDates" class="gitlab_option">
+					Hide Due Date<a href="https://docs.gitlab.com/ee/user/project/issues/due_dates.html" target="_blank">?</a> (sidebar & creation flow)
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>
+					<input type="checkbox" id="subscriptions" class="gitlab_option">
+					Hide Notifications - who is subscribed to the issue (sidebar only)
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>
+					<input type="checkbox" id="confidentiality" class="gitlab_option">
+					Hide Confidentiality Option<a href="https://docs.gitlab.com/ee/user/project/issues/confidential_issues.html" target="_blank">?</a> (sidebar only)
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>
+					<input type="checkbox" id="lock" class="gitlab_option">
+					Hide Lock option (sidebar only)
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>
+					<input type="checkbox" id="dropScreenshots" class="gitlab_option">
+					Hide Drop Screenshots  (creation flow)
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>
+					<input type="checkbox" id="issueType" class="gitlab_option">
+					Hide Issue Type selector (creation flow)
+				</label>
+			</td>
+		</tr>
+
+
+	
+		<tr>
+			<td>
+				<h3>General properties</h3>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>
+					<input type="checkbox" id="todos" class="gitlab_option">
+					Hide Todo's (experimental!)
+				</label>
+			</td>
+		</tr>
+		</table>
+
+		<div id="status"></div>
+		<button id="save">Save</button>
+
+		<script src="options.js"></script>
+	</div>
+</body>
+</html>
